@@ -9,33 +9,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WINX32Lib;
 using DatabaseHelper;
-using Enyim.Caching;
-using Enyim.Caching.Configuration;
-using Enyim.Caching.Memcached;
 
 namespace CameraWrapper
 {
     public partial class Form1 : Form
     {
         ExpSetup newExp = new ExpSetup();
-        DatabaseHelper.DatabaseHelper DBHelper = new DatabaseHelper.DatabaseHelper("127.0.0.1","18.62.9.117","root","w0lfg4ng", "BECIVDatabase");
+        DatabaseHelper.DatabaseHelper DBHelper = new DatabaseHelper.DatabaseHelper("18.62.9.117","18.62.9.117","root","w0lfg4ng", "BECIVDatabase");
 
-        private MemcachedClientConfiguration mcc = new MemcachedClientConfiguration();
-        private MemcachedClient client;
 
-        
         short exp_check1 = 1;
         dynamic exp_check;
 
         public Form1()
         {
             InitializeComponent();
-            mcc.AddServer("18.62.20.173:11211");
-            mcc.SocketPool.ReceiveTimeout = new TimeSpan(0, 0, 10);
-            mcc.SocketPool.ConnectionTimeout = new TimeSpan(0, 0, 10);
-            mcc.SocketPool.DeadTimeout = new TimeSpan(0, 0, 20);
-            LogManager.AssignFactory(new DiagnosticsLogFactory("C:\\memcached\\log.txt"));
-            client = new MemcachedClient(mcc);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -106,8 +94,8 @@ namespace CameraWrapper
             Int16[] data = new Int16[depth * width * height];
             string camID2 = cameraID.Text;
             int camID = Convert.ToInt32(camID2);
-            int runID = 2;
-            int seqID = 6;
+            int runID = DBHelper.getLastRunID();
+            int seqID = DBHelper.getSequenceID();
             short frm = 1;
             short strip = 1;
             short pixel = 1;
@@ -125,32 +113,14 @@ namespace CameraWrapper
                 Int16[] frame = new Int16[FrameVar1.GetLength(0) * FrameVar1.GetLength(1)];
                 int framesize = frame.Length;
                 Buffer.BlockCopy(FrameVar1, 0, frame, 0, framesize*2);
-
-//                byte[] bytesFrame = new byte[2 * width * height];
-//                Buffer.BlockCopy(frame, 0, bytesFrame, 0, bytesFrame.Length);
-
-//                bool a = client.Store(Enyim.Caching.Memcached.StoreMode.Set, "d", bytesFrame);
-
-//                byte[] happy = (byte[])client.Get("d");
-
-
                 Buffer.BlockCopy(frame, 0, data, (i-1)*framesize*2, framesize*2);
-                int b = 1;
+//                int a = 1;
             }
             if (data != null)
             {
-                //DBHelper.writeImageDataToDB(data, depth, width, height, camID, runID, seqID);
-                DBHelper.writeImageDataToCache(data, depth, width, height, camID, runID, seqID);
-                //                imageStruct a = DBHelper.readImageFromCache();
-                //byte[] bytesData = new byte[2 * depth * width * height];
-                //Buffer.BlockCopy(data, 0, bytesData, 0, bytesData.Length);
-
-                
-
-//                bool a = client.Store(Enyim.Caching.Memcached.StoreMode.Set, "data", bytesData);
-
-//                byte[] happy = (byte[])client.Get("data");
-                DBHelper.updateNewImage();
+                DBHelper.writeImageDataToDB(data, depth, width, height, camID, runID, seqID);
+                //DBHelper.writeImageDataToCache(data, depth, width, height, camID, runID, seqID);
+                int a = 1;
             }
             WinVFile.Close();
             newExp.Stop();

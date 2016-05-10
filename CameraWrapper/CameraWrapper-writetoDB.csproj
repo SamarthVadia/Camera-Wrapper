@@ -42,15 +42,15 @@
     </Reference>
     <Reference Include="Enyim.Caching, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Z:\LAB\Samarth\Enyim.Caching.dll</HintPath>
+      <HintPath>..\..\Zeus\Enyim.Caching.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching.Log4NetAdapter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Z:\LAB\Samarth\Enyim.Caching.Log4NetAdapter.dll</HintPath>
+      <HintPath>..\..\Zeus\Enyim.Caching.Log4NetAdapter.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching.NLogAdapter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Z:\LAB\Samarth\Enyim.Caching.NLogAdapter.dll</HintPath>
+      <HintPath>..\..\Zeus\Enyim.Caching.NLogAdapter.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
