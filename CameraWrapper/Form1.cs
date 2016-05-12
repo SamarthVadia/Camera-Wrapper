@@ -15,7 +15,7 @@ namespace CameraWrapper
     public partial class Form1 : Form
     {
         ExpSetup newExp = new ExpSetup();
-        DatabaseHelper.DatabaseHelper DBHelper = new DatabaseHelper.DatabaseHelper("18.62.9.117","18.62.9.117","root","w0lfg4ng", "BECIVDatabase");
+        DatabaseHelper.DatabaseHelper DBHelper = new DatabaseHelper.DatabaseHelper("127.0.0.1","18.62.9.117","root","w0lfg4ng", "BECIVDatabase");
 
 
         short exp_check1 = 1;
@@ -38,7 +38,6 @@ namespace CameraWrapper
         Start_Camera:
             if (checkBox1.Checked== true)
             {
- //               MessageBox.Show(Convert.ToString(acquirebut_check));
                 experiment_check();
                 if (exp_check == 0)
                 {
@@ -46,7 +45,6 @@ namespace CameraWrapper
                 }
                 WinVFile = newExp.GetDocument();
             Check_Camera:
-//                MessageBox.Show(Convert.ToString(exp_check));
                 experiment_check();
                 if (checkBox1.Checked == false)
                 {
@@ -62,7 +60,6 @@ namespace CameraWrapper
                else if (exp_check == 0)
                {
 
-//                   MessageBox.Show("Acq=T, ec=0");
                    process_data(WinVFile);
                    goto Start_Camera;
                }
@@ -83,14 +80,10 @@ namespace CameraWrapper
 
         public void process_data(IDocFile WinVFile)
         {
- //           DatabaseHelper.imageStruct newstr = new DatabaseHelper.imageStruct();
             short depth1, width1, height1;
             dynamic depth = newExp.GetParam(EXP_CMD.EXP_SEQUENTS, out depth1);                  // Returns number of sequential frames
             dynamic width = newExp.GetParam(EXP_CMD.EXP_XDIM, out width1);                   //Returns width or x dimension size
             dynamic height = newExp.GetParam(EXP_CMD.EXP_YDIM, out height1);
-//            newstr.depth = Convert.ToInt16(depth);
-//            newstr.width = Convert.ToInt16(width);
-//            newstr.height = Convert.ToInt16(height);
             Int16[] data = new Int16[depth * width * height];
             string camID2 = cameraID.Text;
             int camID = Convert.ToInt32(camID2);
@@ -114,21 +107,13 @@ namespace CameraWrapper
                 int framesize = frame.Length;
                 Buffer.BlockCopy(FrameVar1, 0, frame, 0, framesize*2);
                 Buffer.BlockCopy(frame, 0, data, (i-1)*framesize*2, framesize*2);
-//                int a = 1;
             }
             if (data != null)
             {
                 DBHelper.writeImageDataToDB(data, depth, width, height, camID, runID, seqID);
-                //DBHelper.writeImageDataToCache(data, depth, width, height, camID, runID, seqID);
-                int a = 1;
             }
             WinVFile.Close();
             newExp.Stop();
-            //DatabaseHelper.imageStruct result = new DatabaseHelper.imageStruct();
-            //result =newFile.readImageFromCache();
-            //MessageBox.Show(Convert.ToString(result.cameraID));
-            //MessageBox.Show(Convert.ToString(result.depth));
-            //MessageBox.Show(Convert.ToString(result.data));
 
         }
 
@@ -139,9 +124,29 @@ namespace CameraWrapper
 
         private void newCameraID_Click(object sender, EventArgs e)
         {
-            //           Application.Run(new Form2());
             Form cameraIDform = new Form2();
             cameraIDform.Show();
+        }
+
+        private void cameraID_TextChanged(object sender, EventArgs e)
+        {
+            string camID2 = cameraID.Text;
+            if (camID2 == "")
+            {
+                goto End_Update;
+            }
+            int camID = Convert.ToInt32(camID2);
+            DatabaseHelper.imageStruct newstr = new DatabaseHelper.imageStruct();
+            newstr = DBHelper.getCameraData(camID);
+            int h = newstr.height;
+            int w = newstr.width;
+            int d = newstr.depth;
+            double ps = newstr.pixelSize;
+            Height.Text = Convert.ToString(h);
+            Width.Text = Convert.ToString(w);
+            Depth.Text = Convert.ToString(d);
+            PixelSize.Text = Convert.ToString(ps);
+        End_Update:;
         }
     }
 }

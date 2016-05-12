@@ -28,25 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.camID = new System.Windows.Forms.TextBox();
             this.height = new System.Windows.Forms.TextBox();
             this.width = new System.Windows.Forms.TextBox();
             this.depth = new System.Windows.Forms.TextBox();
             this.pixelsize = new System.Windows.Forms.TextBox();
-            this.cameraID_label = new System.Windows.Forms.Label();
             this.height_label = new System.Windows.Forms.Label();
             this.width_label = new System.Windows.Forms.Label();
             this.depth_label = new System.Windows.Forms.Label();
             this.pixelsize_label = new System.Windows.Forms.Label();
             this.add_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // camID
-            // 
-            this.camID.Location = new System.Drawing.Point(121, 41);
-            this.camID.Name = "camID";
-            this.camID.Size = new System.Drawing.Size(89, 20);
-            this.camID.TabIndex = 0;
             // 
             // height
             // 
@@ -76,15 +67,6 @@
             this.pixelsize.Name = "pixelsize";
             this.pixelsize.Size = new System.Drawing.Size(89, 20);
             this.pixelsize.TabIndex = 4;
-            // 
-            // cameraID_label
-            // 
-            this.cameraID_label.AutoSize = true;
-            this.cameraID_label.Location = new System.Drawing.Point(46, 44);
-            this.cameraID_label.Name = "cameraID_label";
-            this.cameraID_label.Size = new System.Drawing.Size(57, 13);
-            this.cameraID_label.TabIndex = 6;
-            this.cameraID_label.Text = "Camera ID";
             // 
             // height_label
             // 
@@ -142,12 +124,10 @@
             this.Controls.Add(this.depth_label);
             this.Controls.Add(this.width_label);
             this.Controls.Add(this.height_label);
-            this.Controls.Add(this.cameraID_label);
             this.Controls.Add(this.pixelsize);
             this.Controls.Add(this.depth);
             this.Controls.Add(this.width);
             this.Controls.Add(this.height);
-            this.Controls.Add(this.camID);
             this.Name = "Form2";
             this.Text = "CameraID";
             this.Load += new System.EventHandler(this.Form2_Load);
@@ -157,13 +137,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox camID;
         private System.Windows.Forms.TextBox height;
         private System.Windows.Forms.TextBox width;
         private System.Windows.Forms.TextBox depth;
         private System.Windows.Forms.TextBox pixelsize;
-        private System.Windows.Forms.Label cameraID_label;
         private System.Windows.Forms.Label height_label;
         private System.Windows.Forms.Label width_label;
         private System.Windows.Forms.Label depth_label;
