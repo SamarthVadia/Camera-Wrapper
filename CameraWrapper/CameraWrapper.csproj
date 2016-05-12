@@ -38,19 +38,19 @@
   <ItemGroup>
     <Reference Include="DatabaseHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Z:\Samarth\Zeus\databasehelper3\databasehelper3\bin\Debug\DatabaseHelper.dll</HintPath>
+      <HintPath>..\..\..\Zeus\databasehelper3\databasehelper3\bin\Debug\DatabaseHelper.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Z:\LAB\Samarth\Enyim.Caching.dll</HintPath>
+      <HintPath>Z:\Samarth\Zeus\databasehelper3\databasehelper3\bin\Debug\Enyim.Caching.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching.Log4NetAdapter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Z:\LAB\Samarth\Enyim.Caching.Log4NetAdapter.dll</HintPath>
+      <HintPath>Z:\Samarth\Zeus\databasehelper3\databasehelper3\bin\Debug\Enyim.Caching.Log4NetAdapter.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching.NLogAdapter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Z:\LAB\Samarth\Enyim.Caching.NLogAdapter.dll</HintPath>
+      <HintPath>Z:\Samarth\Zeus\databasehelper3\databasehelper3\bin\Debug\Enyim.Caching.NLogAdapter.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -84,7 +84,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CameraWrapper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
