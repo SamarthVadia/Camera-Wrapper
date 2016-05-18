@@ -19,4 +19,5 @@ namespace CameraWrapper
             Application.Run(new Form1());
         }
     }
+
 }

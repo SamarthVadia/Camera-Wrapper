@@ -16,13 +16,15 @@ namespace CameraWrapper
 {
     public partial class Form2 : Form
     {
-        DatabaseHelper.DatabaseHelper DBHelper = new DatabaseHelper.DatabaseHelper("127.0.0.1", "18.62.9.117", "root", "w0lfg4ng", "BECIVDatabase");
+        public CameraWrapperSettings serverSettings = Form1.serverSettings;
+        DatabaseHelper.DatabaseHelper DBHelper;
         private MySqlConnection conn = null;
         
 
         public Form2()
         {
             InitializeComponent();
+            DBHelper = new DatabaseHelper.DatabaseHelper(serverSettings.MemcachedServerIP, serverSettings.DatabaseServerIP, serverSettings.Username, serverSettings.Password, serverSettings.DBName);
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -42,7 +44,7 @@ namespace CameraWrapper
             float ps = Convert.ToSingle(pixelsize.Text);
 
             DBHelper.writeCameraDataToDB(ps, d, w, h);
-            string myConnectionString = "server=18.62.9.117;uid=root;" + "pwd=w0lfg4ng;database=BECIVDatabase;";
+            string myConnectionString = "server=" + serverSettings.DatabaseServerIP + ";uid=" + serverSettings.Username + ";pwd=" + serverSettings.Password + ";database=" + serverSettings.DBName + ";";
             this.conn = new MySqlConnection(myConnectionString);
             conn.Open();
             MySqlCommand cmd1 = new MySqlCommand("SELECT cameraID FROM cameras ORDER BY cameraID DESC LIMIT 1", this.conn);
