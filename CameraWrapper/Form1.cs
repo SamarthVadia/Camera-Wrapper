@@ -15,7 +15,9 @@ namespace CameraWrapper
     public partial class Form1 : Form
     {
         ExpSetup newExp = new ExpSetup();
-        DatabaseHelper.DatabaseHelper DBHelper = new DatabaseHelper.DatabaseHelper("127.0.0.1","18.62.9.117","root","w0lfg4ng", "BECIVDatabase");
+        public static CameraWrapperSettings serverSettings = new CameraWrapperSettings();
+        DatabaseHelper.DatabaseHelper DBHelper = new DatabaseHelper.DatabaseHelper(serverSettings.MemcachedServerIP, serverSettings.DatabaseServerIP, serverSettings.Username, serverSettings.Password, serverSettings.DBName);
+
 
 
         short exp_check1 = 1;
@@ -24,6 +26,7 @@ namespace CameraWrapper
         public Form1()
         {
             InitializeComponent();
+            settingsGrid.SelectedObject = serverSettings;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -38,6 +41,7 @@ namespace CameraWrapper
         Start_Camera:
             if (checkBox1.Checked== true)
             {
+                DBHelper = new DatabaseHelper.DatabaseHelper(serverSettings.MemcachedServerIP, serverSettings.DatabaseServerIP, serverSettings.Username, serverSettings.Password, serverSettings.DBName);
                 experiment_check();
                 if (exp_check == 0)
                 {
@@ -87,8 +91,8 @@ namespace CameraWrapper
             Int16[] data = new Int16[depth * width * height];
             string camID2 = cameraID.Text;
             int camID = Convert.ToInt32(camID2);
-            int runID = 2;
-            int seqID = 6;
+            int runID = DBHelper.getLastRunID();
+            int seqID = DBHelper.getSequenceID();
             short frm = 1;
             short strip = 1;
             short pixel = 1;
@@ -110,8 +114,17 @@ namespace CameraWrapper
             }
             if (data != null)
             {
-                DBHelper.writeImageDataToCache(data, depth, width, height, camID, runID, seqID);
-                DBHelper.updateNewImage();
+                string type = serverSettings.SaveTypeMethod.ToString();
+                if (type.Equals("WriteToCache")==true)
+                {
+                    DBHelper.writeImageDataToCache(data, depth, width, height, camID, runID, seqID);
+                    DBHelper.updateNewImage();
+                }
+                else
+                {
+                    DBHelper.writeImageDataToDB(data, depth, width, height, camID, runID, seqID);
+                }
+                
             }
             WinVFile.Close();
             newExp.Stop();
