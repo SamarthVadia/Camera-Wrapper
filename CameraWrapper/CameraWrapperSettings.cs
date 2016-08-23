@@ -81,13 +81,13 @@ namespace CameraWrapper
 
         public enum heartbeatType { On, Off };
 
-        private saveType heartbeatTypeMethod;
+        private heartbeatType heartbeatTypeMethod;
         [Description("Determines whether heartbeat is on or off from wrapper side"),
         Category("Heartbeat")]
-        public saveType HeartbeatTypeMethod
+        public heartbeatType HeartbeatTypeMethod
         {
-            get { return HeartbeatTypeMethod; }
-            set { HeartbeatTypeMethod = value; }
+            get { return heartbeatTypeMethod; }
+            set { heartbeatTypeMethod = value; }
         }
     }
 }
