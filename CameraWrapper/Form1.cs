@@ -59,6 +59,11 @@ namespace CameraWrapper
                 if (exp_check == 1)
                 {
                     await PutTaskDelay();
+                    string type = serverSettings.HeartbeatTypeMethod.ToString();
+                    if (type.Equals("On") == true)
+                    {
+                        DBHelper.setHeartbeat(serverSettings.CameraName);
+                    }
                     goto Check_Camera;
                }
                else if (exp_check == 0)

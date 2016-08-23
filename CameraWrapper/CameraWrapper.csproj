@@ -38,7 +38,7 @@
   <ItemGroup>
     <Reference Include="DatabaseHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Zeus\databasehelper3\databasehelper3\bin\Debug\DatabaseHelper.dll</HintPath>
+      <HintPath>Z:\LAB\Samarth\Zeus\GitHubVersions\DatabaseHelper\DatabaseHelper\bin\Release\DatabaseHelper.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

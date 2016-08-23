@@ -70,6 +70,24 @@ namespace CameraWrapper
             set { saveTypeMethod = value; }
         }
 
+        private string cameraName = "Camera1";
+        [Description("Set the name of hearbeat monitor for Zeus"),
+       Category("Heartbeat")]
+        public string CameraName
+        {
+            get { return cameraName; }
+            set { cameraName = value; }
+        }
 
+        public enum heartbeatType { On, Off };
+
+        private saveType heartbeatTypeMethod;
+        [Description("Determines whether heartbeat is on or off from wrapper side"),
+        Category("Heartbeat")]
+        public saveType HeartbeatTypeMethod
+        {
+            get { return HeartbeatTypeMethod; }
+            set { HeartbeatTypeMethod = value; }
+        }
     }
 }
